@@ -1,0 +1,64 @@
+<!-- templates/header.html -->
+<div class="header">
+    <a href="/" class="logo-container">
+        <img src="{{ url_for('static', filename='JOB PORTAL (1).jpg') }}" alt="QuickOne Logo" class="logo-img">
+        <div class="logo-text">Quick<span>One</span></div>
+    </a>
+    <div class="nav-toggle" onclick="toggleNav()">☰</div>
+    <div class="nav">
+        <a href="/">Home</a>
+        <a href="/jobs">Jobs</a>
+        <a href="/about">About</a>
+        <a href="/contact">Contact</a>
+    </div>
+    {% if 'username' in session %}
+        <div class="profile-container">
+            <div class="profile-icon" onclick="toggleDropdown()">
+                <img src="{{ url_for('static', filename='profile.png') }}" alt="User Profile">
+                <span class="status-indicator"></span>
+            </div>
+            <div class="dropdown-menu" id="dropdownMenu">
+                <div class="user-info">
+                    <strong>{{ session['username'] }}</strong>
+                </div>
+                <a href="/forgot-password" class="dropdown-item change-password">
+                    <i class="fas fa-lock"></i> Change Password
+                </a>
+                <a href="/logout" class="dropdown-item logout">
+                    <i class="fas fa-sign-out-alt"></i> Logout
+                </a>
+            </div>
+        </div>
+    {% else %}
+        <a href="/login" class="signin-button">Sign In</a>
+    {% endif %}
+</div>
+
+<script>
+    // Toggle Navbar
+    function toggleNav() {
+        const nav = document.querySelector('.nav');
+        nav.classList.toggle('active');
+    }
+
+    // Toggle Dropdown
+    function toggleDropdown() {
+        const dropdown = document.getElementById('dropdownMenu');
+        dropdown.style.display = dropdown.style.display === 'block' ? 'none' : 'block';
+    }
+
+    // Close dropdown when clicking outside
+    window.addEventListener('click', function(event) {
+        const dropdown = document.getElementById('dropdownMenu');
+        const profileIcon = document.querySelector('.profile-icon');
+        const navToggle = document.querySelector('.nav-toggle');
+
+        if (!profileIcon.contains(event.target) && !dropdown.contains(event.target)) {
+            dropdown.style.display = 'none';
+        }
+
+        if (!navToggle.contains(event.target) && !document.querySelector('.nav').contains(event.target)) {
+            document.querySelector('.nav').classList.remove('active');
+        }
+    });
+</script>

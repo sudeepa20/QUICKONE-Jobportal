@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Admin Dashboard - Job Portal</title>
+    <link rel="stylesheet" href="/static/admindashstyle.css">
+</head>
+<body>
+
+<div class="container">
+    <h1>Admin Dashboard</h1>
+    
+    <!-- Job Add Form -->
+    <form action="/add_job" method="post" enctype="multipart/form-data" class="job-form">
+        <h2>Add Job</h2>
+        <input type="text" name="company_name" placeholder="Company Name" required />
+        <input type="text" name="job_name" placeholder="Job Name" required />
+        
+        <!-- Dropdown for Job Type -->
+        <select name="job_type" required>
+            <option value="" disabled selected>Select Job Type</option>
+            <option value="IT">IT</option>
+            <option value="Non-IT">Non-IT</option>
+        </select>
+
+        <input type="text" name="location" placeholder="Location (e.g., Bangalore)" required />
+        <input type="number" name="job_offer" step="0.1" placeholder="Job Offer (LPA)" required />
+        <textarea name="job_description" placeholder="Job Description" required></textarea>
+
+        <!-- File Input for Company Logo -->
+        <input type="file" name="company_logo" accept="image/*" required />
+
+        <!-- ✅ New Input for Application Link -->
+        <input type="url" name="link" placeholder="Application Link" required />
+
+        <!-- ✅ New Input for Expiry Date (Optional) -->
+        <input type="date" name="expiry_date" placeholder="Expiry Date (Optional)" />
+
+        <button type="submit">Add Job</button>
+    </form>
+
+    <!-- Job List Table -->
+    <h2>Job List</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Logo</th>
+                <th>Company Name</th>
+                <th>Job Name</th>
+                <th>Job Type</th>
+                <th>Location</th>
+                <th>Offer (LPA)</th>
+                <th>Description</th>
+                <th>Link</th>
+                <th>Expiry Date</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for job in jobs %}
+            <tr>
+                <td>{{ job.job_id }}</td>
+                <td>
+                    {% if job.logo %}
+                    <img src="{{ url_for('static', filename='logos/' + job.logo) }}" alt="Logo" class="company-logo">
+                    {% else %}
+                    No Logo
+                    {% endif %}
+                </td>
+                <td>{{ job.company_name }}</td>
+                <td>{{ job.job_name }}</td>
+                <td>{{ job.job_type }}</td>
+                <td>{{ job.location }}</td>
+                <td>{{ job.job_offer }}</td>
+                <td>{{ job.job_description }}</td>
+                
+                <!-- ✅ Display Link -->
+                <td>
+                    {% if job.link %}
+                        <a href="{{ job.link }}" target="_blank" class="apply-btn">Apply Now</a>
+                    {% else %}
+                        No Link
+                    {% endif %}
+                </td>
+
+                <!-- ✅ Display Expiry Date -->
+                <td>
+                    {% if job.expiry_date %}
+                        {{ job.expiry_date }}
+                    {% else %}
+                        Not Set
+                    {% endif %}
+                </td>
+
+                <td>
+                    <!-- Update Button -->
+                    <form action="/update_job/{{ job.job_id }}" method="post" style="display: inline-block;">
+                        <button type="submit" class="update-btn" onclick="return confirm('Are you sure you want to update this job?')">Update</button>
+                    </form>
+                    
+                    <!-- Delete Button -->
+                    <form action="/delete_job/{{ job.job_id }}" method="post" style="display: inline-block;">
+                        <button type="submit" class="delete-btn" onclick="return confirm('Are you sure you want to delete this job?')">Delete</button>
+                    </form>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+</body>
+</html>

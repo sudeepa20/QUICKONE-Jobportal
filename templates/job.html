@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Job Listings</title>
+    <link rel="stylesheet" href="/static/headerstyle.css">
+    <link rel="stylesheet" href="/static/jobstyle.css">
+</head>
+<body>
+    {% include 'header.html' %}
+
+    <h1>Explore Job Opportunities</h1>
+
+    <div class="job-list">
+        {% if jobs %}
+            {% for job in jobs %}
+            <div class="job-card">
+                <div class="job-header">
+                    <!-- Company Logo -->
+                    {% if job.logo %}
+                    <img src="{{ url_for('static', filename='logos/' + job.logo) }}" alt="{{ job.company_name }}" class="company-logo">
+                    {% else %}
+                    <div class="no-logo">No Logo</div>
+                    {% endif %}
+                    <div class="job-info">
+                        <h3 class="company-name">{{ job.company_name }}</h3>
+                        <p class="location">{{ job.location }}</p>
+                    </div>
+                </div>
+
+                <h2 class="job-title">{{ job.job_name }}</h2>
+                <p class="job-description">{{ job.job_description[:100] }}...</p>
+
+                <!-- Job Tags -->
+                <div class="job-tags">
+                    <span class="tag type">{{ job.job_type }}</span>
+                    <span class="tag salary">{{ job.job_offer }} LPA</span>
+                </div>
+
+                <!-- Action Buttons -->
+                <div class="job-actions">
+                    <a href="{{ url_for('job_details', job_id=job.job_id) }}" class="details-btn">Details</a>
+                    {% if job.apply_link %}
+                    <a href="{{ job.link }}" class="apply-btn" target="_blank">Apply Now</a>
+                    {% endif %}
+                </div>
+            </div>
+            {% endfor %}
+        {% else %}
+            <div class="no-jobs">
+                <p>No jobs available at the moment.</p>
+                <img src="{{ url_for('static', filename='nojob.webp') }}" alt="No Jobs">
+            </div>
+        {% endif %}
+    </div>
+</body>
+</html>

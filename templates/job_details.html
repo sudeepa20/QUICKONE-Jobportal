@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{{ job.job_name }} - Job Details</title>
+    <link rel="stylesheet" href="/static/jobdetails.css">
+</head>
+<body>
+
+<div class="job-details-container">
+    <!-- Back Button -->
+    <div class="back-button-wrapper">
+        <a href="javascript:history.back()" class="back-btn">← Back</a>
+    </div>
+    
+    <div class="header">
+        <div class="company-info">
+            {% if job.logo %}
+                <img src="{{ url_for('static', filename='logos/' + job.logo) }}" alt="{{ job.company_name }}" class="company-logo">
+            {% endif %}
+            <div>
+                <h1>{{ job.job_name }}</h1>
+                <p class="company-name">{{ job.company_name }}</p>
+            </div>
+        </div>
+
+        <div class="tags">
+            <span class="tag {% if job.job_type == 'IT' %}type-it{% else %}type-non-it{% endif %}">
+                {{ job.job_type }}
+            </span>
+            <span class="tag salary">{{ job.job_offer }} LPA</span>
+        </div>
+
+        <a href="{{ job.link }}" class="apply-btn">Apply Now</a>
+    </div>
+
+    <div class="job-description">
+        <h2>Job Description</h2>
+        <p><strong>Role:</strong> {{ job.job_name }}</p>
+        <p><strong>Company:</strong> {{ job.company_name }}</p>
+        <p><strong>Location:</strong> {{ job.location }}</p>
+        <p><strong>Description:</strong> {{ job.job_description }}</p>
+        <p><strong>Salary:</strong> {{ job.job_offer }} LPA</p>
+    </div>
+</div>
+
+</body>
+</html>

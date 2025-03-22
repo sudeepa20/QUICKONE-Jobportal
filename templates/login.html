@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='logstyle.css') }}">
+    <title>User Login</title>
+</head>
+
+    <body>
+        <section>
+            <form action="/login" method="post" id="login">
+                <h1>Welcome Back!</h1>
+                <div class="inputbox">
+                    <input type="text" id="username"name="username" placeholder="Username" required>
+                    
+                    <i class='fas fa-user' ></i>
+                </div>
+                <div class="inputbox">
+                    <input type="password" id="password" name="password" placeholder="Password" required>
+                   
+                    <i class="fas fa-lock"></i>
+                </div>
+                <div class="forget">
+                    <a href="/forgot-password">Forgot Password</a>
+                </div>
+                <button type="submit" class="login-btn">Log in</button>
+                
+                   
+                    
+                        <p style= color:black> Don't have a account? <a id="register" href="/register">Register</a></style></p>
+                   
+                    
+                </div>
+            </form>
+        </section>
+        
+    </body>
+
+</html>

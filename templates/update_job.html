@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Update Job - Admin Dashboard</title>
+    <link rel="stylesheet" href="/static/admindashstyle.css">
+</head>
+<body>
+
+<div class="container">
+    <h1>Update Job</h1>
+    
+    <form action="/update_job/{{ job.job_id }}" method="post" enctype="multipart/form-data" class="job-form">
+        <input type="text" name="company_name" value="{{ job.company_name }}" placeholder="Company Name" required />
+        <input type="text" name="job_name" value="{{ job.job_name }}" placeholder="Job Name" required />
+        
+        <select name="job_type" required>
+            <option value="IT" {% if job.job_type == 'IT' %}selected{% endif %}>IT</option>
+            <option value="Non-IT" {% if job.job_type == 'Non-IT' %}selected{% endif %}>Non-IT</option>
+        </select>
+
+        <input type="text" name="location" value="{{ job.location }}" placeholder="Location (e.g., Bangalore)" required />
+        <input type="number" name="job_offer" value="{{ job.job_offer }}" step="0.1" placeholder="Job Offer (LPA)" required />
+        <textarea name="job_description" placeholder="Job Description" required>{{ job.job_description }}</textarea>
+
+        <!-- New Field for Link -->
+        <input type="url" name="job_link" value="{{ job.job_link }}" placeholder="Application Link (https://)" required />
+
+        <!-- Display Existing Logo -->
+        {% if job.logo %}
+            <img src="{{ url_for('static', filename='logos/' + job.logo) }}" alt="{{ job.company_name }}" style="max-width: 100px; max-height: 100px; object-fit: contain; margin-bottom: 10px; border: 1px solid #ccc; padding: 5px; border-radius: 8px;">
+        {% endif %}
+
+        <!-- File Input for Company Logo -->
+        <input type="file" name="company_logo" accept="image/*" />
+
+        <button type="submit">Update Job</button>
+    </form>
+
+    <!-- Back to Dashboard Button -->
+    <a href="/admin-dashboard" style="display: inline-block; margin-top: 20px; padding: 8px 16px; background-color: #007bff; color: #fff; text-decoration: none; border-radius: 5px; transition: background-color 0.3s ease;">
+        Back to Dashboard
+    </a>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QuickOne - Find Your Dream Job</title>
+    <link rel="stylesheet" href="/static/styles.css">
+    <link rel="stylesheet" href="/static/headerstyle.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+
+{% include 'header.html' %}
+
+<div class="container">
+    <div class="badge">No. 1 Job Search Website</div>
+    <h1>
+        Search, Apply &<br>
+        Get Your <span>Dream Jobs</span>
+    </h1>
+    
+    <p>Your next career move starts here! Explore thousands of job opportunities tailored to your skills and preferences.</p>
+    
+    <div class="search-box">
+        <input type="text" placeholder="Find your dream jobs">
+        <button><i class="fas fa-search"></i></button>
+    </div>
+
+    <!-- Job Categories -->
+    <div class="job-categories">
+        <h2>Explore Top Job Categories</h2>
+        <div class="categories">
+            <div class="category">IT & Software</div>
+            <div class="category">Business & Finance</div>
+            <div class="category">Healthcare</div>
+            <div class="category">Engineering</div>
+            <div class="category">Education</div>
+            <div class="category">Creative & Design</div>
+        </div>
+    </div>
+
+    <!-- Popular Jobs -->
+    <div class="popular-jobs">
+        <h2>Popular Jobs</h2>
+        <div class="jobs-list">
+            <div class="job-card">
+                <h3>Software Developer</h3>
+                <p>Google - California, USA</p>
+                <span class="salary">$120k - $150k/year</span>
+            </div>
+            <div class="job-card">
+                <h3>Marketing Manager</h3>
+                <p>Amazon - New York, USA</p>
+                <span class="salary">$90k - $110k/year</span>
+            </div>
+            <div class="job-card">
+                <h3>Data Scientist</h3>
+                <p>Microsoft - Seattle, USA</p>
+                <span class="salary">$130k - $160k/year</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Key Benefits -->
+    <div class="key-benefits">
+        <h2>Why Choose QuickOne?</h2>
+        <div class="benefits-list">
+            <div class="benefit-item">
+                <i class="fas fa-briefcase"></i>
+                <h3>Thousands of Jobs</h3>
+                <p>We provide a wide range of job opportunities to match your skills and experience.</p>
+            </div>
+            <div class="benefit-item">
+                <i class="fas fa-user-shield"></i>
+                <h3>Trusted Employers</h3>
+                <p>Connect with verified and trusted employers globally.</p>
+            </div>
+            <div class="benefit-item">
+                <i class="fas fa-bolt"></i>
+                <h3>Fast Application Process</h3>
+                <p>Apply quickly with an easy-to-use interface and quick response from employers.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Footer -->
+<footer class="footer">
+    <div class="footer-container">
+        <div class="footer-section about">
+            <h3>QuickOne</h3>
+            <p>Discover your next career move with QuickOne. We connect talented professionals with top companies, ensuring a seamless job search experience.</p>
+        </div>
+        <div class="footer-section links">
+            <h3>Quick Links</h3>
+            <ul>
+                <li><a href="/">Home</a></li>
+                <li><a href="/jobs">Jobs</a></li>
+                <li><a href="/about">About</a></li>
+                <li><a href="/contact">Contact</a></li>
+            </ul>
+        </div>
+        <div class="footer-section contact">
+            <h3>Contact Us</h3>
+            <p>Email: <a href="mailto:support@quickone.com">support@quickone.com</a></p>
+            <p>Phone: +1 234 567 890</p>
+            <p>Address: 123 Job Street, City, Country</p>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <p>© 2025 QuickOne. All Rights Reserved.</p>
+    </div>
+</footer>
+
+<!-- Dot Effect Script -->
+<script>
+ document.addEventListener("click", (e) => {
+    const dot = document.createElement("div");
+    dot.style.position = "absolute";
+    dot.style.width = "20px";
+    dot.style.height = "20px";
+    dot.style.backgroundColor = "#6c63ff";
+    dot.style.borderRadius = "50%";
+
+    // Corrected Offset for Accurate Positioning
+    dot.style.left = `${e.clientX - 10}px`;
+    dot.style.top = `${window.scrollY + e.clientY - 10}px`;
+
+    dot.style.opacity = "0.7";
+    dot.style.pointerEvents = "none";
+    dot.style.transform = "scale(0)";
+    dot.style.transition = "transform 0.3s ease-out, opacity 0.3s ease-out";
+
+    document.body.appendChild(dot);
+
+    // Trigger animation
+    requestAnimationFrame(() => {
+        dot.style.transform = "scale(3)";
+        dot.style.opacity = "0";
+    });
+
+    // Remove after animation
+    setTimeout(() => dot.remove(), 300);
+});
+
+</script>
+
+</body>
+</html>
